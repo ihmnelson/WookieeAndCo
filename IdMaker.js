@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 import fs from 'fs';
 import path from 'path';
 
@@ -42,5 +40,30 @@ function generateUniqueId(filepath) {
         return null;
     }
 }
+
+/**
+ * Searches for a user by their ID in a JSON file and returns their information.
+ *
+ * @param {string} filepath - The path to the JSON file.
+ * @param {string} userId - The ID of the user to search for.
+ * @returns {object|null} - The user's information if found, otherwise null.
+ */
+function findUserById(filepath, userId) {
+    try {
+      // Read the JSON file:
+      const fileContent = fs.readFileSync(filepath, 'utf8');
+      const data = JSON.parse(fileContent);
+  
+      // Search for the user:
+      if (data[userId]) {
+        return data[userId];
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error(`Error: Could not read or parse JSON file: ${error}`);
+      return null;
+    }
+  }
 
 export default generateUniqueId;
