@@ -1,52 +1,46 @@
 const fs = require('fs');
 const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-
-function newDataFile() {
-    let identity = randomizeID();
-    let isUnique = false;
-    while(!isUnique) {
-        identity = randomizeID();
-    }
-    
-
-    const jsonData = JSON.stringify(identity, null, 2); // The '2' adds indentation for readability
-
-    const filePath = path.join(__dirname, 'ID.json'); // Define the file path
-
-    fs.writeFile(filePath, jsonData, (err) => {
-        if (err) {
-            console.error("Error writing file:", err);
-        } else {
-            console.log("Successfully wrote to file");
+/**
+ * Generates a unique ID, checks for its existence in a JSON file, and returns it.
+ *
+ * @param {string} filepath - The path to the JSON file.
+ * @returns {string|null} - A unique ID that is not already a key in the JSON file,
+ * or null if there are issues with file access or JSON handling.
+ */
+function generateUniqueId(filepath) {
+    try {
+        // Ensuring the directory exists
+        const directory = path.dirname(filepath);
+        if (directory && !fs.existsSync(directory)) {
+            fs.mkdirSync(directory, { recursive: true });
         }
-    });
-}
 
-function randomizeID() {
-    let builder = "";
-    for(let i = 0; i < 4; i++) {
-        let randNum = Math.floor(Math.random()*10);
-        builder.concat(randNum);
+        let existingData = {};
+        if (fs.existsSync(filepath)) {
+            try {
+                const fileContent = fs.readFileSync(filepath, 'utf8');
+                existingData = fileContent ? JSON.parse(fileContent) : {};
+            } catch (error) {
+                console.warn("Warning: JSON file is empty or invalid. Returning a new ID.");
+                existingData = {};
+            }
+        }
+
+        // Generating and checking ID:
+        while (true) {
+            const newId = Math.floor(Math.random() * 10000).toString().padStart(4, '0'); // Generate a 4-digit ID
+            if (!(newId in existingData)) {
+                return newId; // Found a unique ID, return it
+            }
+            // console.log(`Collision: ID ${newId} already exists. Retrying.`);
+        }
+    } catch (error) {
+        console.error(`Error: Could not read or create file: ${error}`);
+        return null;
     }
-
-    return randNum;
-
 }
 
-//function for id (takes filename to write)
-function newID(filepath) {
-
-}
-
-//function for writing to the json file containing id.
-function verifyID(filepath) {
-    
-}
-
-
-
-function IDLocator(ID) {
-    const jsonString = JSON.stringify("data_test.json");
-    return jsonString.includes(ID);
-}
+export default generateUniqueId;
