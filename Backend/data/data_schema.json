@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "patternProperties": {
+      "^[0-9]+$": {
+        "type": "object",
+        "properties": {
+          "username": { "type": "string" },
+          "cached_password": { "type": "string" },
+          "streak": { "type": "integer", "minimum": 0 },
+          "todays_data": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "enum": [0, 1]
+            },
+            "minItems": 24,
+            "maxItems": 24
+          }
+        },
+        "required": ["username", "cached_password", "streak", "todays_data"],
+        "additionalProperties": false
+      }
+    },
+    "additionalProperties": false
+  }
