@@ -1,23 +1,99 @@
+import { Link } from 'react-router-dom';
+
 function Signup() {
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // TODO: Send POST request to backend /api/signup with username + password
-    };
-  
-    return (
-      <div>
-        <h1>📝 Signup Page</h1>
-  
+  const buttonStyle = {
+    margin: '16px',
+    padding: '1rem 6rem',
+    fontSize: '1.5rem',
+    fontWeight: '600',
+    color: '#ffffff',
+    backgroundColor: '#5b4f6e',
+    border: 'none',
+    borderRadius: '12px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+  };
+
+  const buttonHoverStyle = {
+    backgroundColor: '#44395a',
+  };
+
+  const inputStyle = {
+    margin: '8px 0',
+    padding: '0.8rem',
+    fontSize: '1.2rem',
+    borderRadius: '8px',
+    border: '2px solid #abc9f1',
+    width: '100%',
+    boxSizing: 'border-box',
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // TODO: Send POST request to backend /api/signup with username + password
+  };
+
+  return (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      height: '100vh',
+      paddingTop: '20vh',
+      backgroundImage: `
+        linear-gradient(90deg, #d3dee6 25%, transparent 25%, transparent 75%, #d3dee6 75%),
+        linear-gradient(#d3dee6 25%, transparent 25%, transparent 75%, #d3dee6 75%)
+      `,
+      backgroundSize: '516px 516px',
+      backgroundPosition: '0 0, 200px 200px',
+      backgroundColor: '#e6ecef',
+    }}>
+      <div style={{
+        border: '4px solid #abc9f1',
+        padding: '4rem',
+        borderRadius: '24px',
+        backgroundColor: '#e6ecef',
+        textAlign: 'center',
+        width: '800px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+        <h1 style={{ 
+          color: '#5b4f6e', 
+          fontSize: '7rem', 
+          marginTop: '0',
+          marginBottom: '60px',
+        }}>
+          📝 Sign Up 📝
+        </h1>
+
         {/* Signup form */}
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Username" /><br/>
-          <input type="password" placeholder="Password" /><br/>
-          <button type="submit">Sign Up</button>
+        <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '400px' }}>
+          <input type="text" placeholder="Username" style={inputStyle} /><br/>
+          <input type="password" placeholder="Password" style={inputStyle} /><br/>
+          <button
+            type="submit"
+            style={buttonStyle}
+            onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
+            onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+          >
+            Sign Up
+          </button>
         </form>
-  
+
+        {/* Link back to login page */}
+        <div style={{ marginTop: '16px' }}>
+          <Link to="/login" style={{ color: '#5b4f6e', fontWeight: '600', textDecoration: 'underline' }}>
+            Already have an account? Login
+          </Link>
+        </div>
+
         {/* TODO: Show success or error message here */}
       </div>
-    );
-  }
-  
-  export default Signup;
+    </div>
+  );
+}
+
+export default Signup;
