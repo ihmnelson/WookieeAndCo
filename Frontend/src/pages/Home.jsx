@@ -12,6 +12,9 @@ function Home() {
       <Link to="/login">
         <button>Login</button>
       </Link>
+      <Link to="/game">
+        <button>Game</button>
+      </Link>
 
       {/* You can add some welcome text or images here */}
     </div>
