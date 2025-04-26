@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 function Home() {
   const buttonStyle = {
     margin: '16px',
-    padding: '1rem 6rem',
-    fontSize: '1.5rem',
+    padding: '1.2rem 0', // remove horizontal padding
+    width: '600px',       // <-- set fixed width
+    fontSize: '2rem',
     fontWeight: '600',
     color: '#ffffff',
     backgroundColor: '#5b4f6e',
@@ -12,6 +13,7 @@ function Home() {
     borderRadius: '12px',
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
+    textAlign: 'center',
   };
 
   const buttonHoverStyle = {
@@ -40,7 +42,7 @@ function Home() {
         backgroundColor: '#e6ecef',
         textAlign: 'center',
         width: '800px',
-        height: '300px',
+        height: '455px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -48,8 +50,8 @@ function Home() {
       }}>
         <h1 style={{ 
           color: '#5b4f6e', 
-          fontSize: '7rem', 
-          marginTop: '0',       // no top margin
+          fontSize: '8rem', 
+          marginTop: '-42px',       // no top margin
           marginBottom: '60px'  // small gap below the title
         }}>
           Health Bingo
