@@ -5,7 +5,7 @@ const path = require('path');
 function main() {
     const identity = randomizeID();
 
-    const jsonData = JSON.stringify(data, null, 2); // The '2' adds indentation for readability
+    const jsonData = JSON.stringify(identity, null, 2); // The '2' adds indentation for readability
 
     const filePath = path.join(__dirname, 'ID.json'); // Define the file path
 
