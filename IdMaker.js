@@ -66,4 +66,6 @@ function findUserById(filepath, userId) {
     }
   }
 
-export default generateUniqueId;
+export function generateUniqueId(filepath) {};
+export function findUserById(filepath, userId) {};
+export default {generateUniqueId, findUserById};
