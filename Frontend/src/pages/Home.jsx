@@ -56,16 +56,6 @@ function Home() {
         }}>
           Healthy Habits Bingo 
         </h1>
-      {/* Navigation buttons */}
-      <Link to="/signup">
-        <button>Sign Up</button>
-      </Link>
-      <Link to="/login">
-        <button>Login</button>
-      </Link>
-      <Link to="/game">
-        <button>Game</button>
-      </Link>
 
         <div>
           <Link to="/signup">
