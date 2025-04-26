@@ -14,3 +14,15 @@ app.get('/api/hello', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+app.post('/api/signup', (req,res) => {
+  // needs to be implemented (NEW USER)
+}); 
+
+app.patch('/api/game', (req, res) => {
+  // needs to be implemented (USER CHECKS OR UNCHECKS BOX, maybe saves? anyways EXISTING USER PLAYS)
+});
+
+app.get('/api/game', (req, res) => {
+  // needs to be implemented 
+});
