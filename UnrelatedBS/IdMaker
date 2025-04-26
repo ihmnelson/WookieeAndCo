@@ -7,7 +7,7 @@ function main() {
 
     const jsonData = JSON.stringify(data, null, 2); // The '2' adds indentation for readability
 
-    const filePath = path.join(__dirname, 'data.json'); // Define the file path
+    const filePath = path.join(__dirname, 'ID.json'); // Define the file path
 
     fs.writeFile(filePath, jsonData, (err) => {
         if (err) {
