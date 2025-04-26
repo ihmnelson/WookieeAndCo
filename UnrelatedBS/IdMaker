@@ -1,0 +1,32 @@
+const fs = require('fs');
+const path = require('path');
+
+
+function main() {
+    const identity = randomizeID();
+
+    const jsonData = JSON.stringify(identity, null, 2); // The '2' adds indentation for readability
+
+    const filePath = path.join(__dirname, 'ID.json'); // Define the file path
+
+    fs.writeFile(filePath, jsonData, (err) => {
+        if (err) {
+            console.error("Error writing file:", err);
+        } else {
+            console.log("Successfully wrote to file");
+        }
+    });
+}
+
+function randomizeID() {
+    let builder = "";
+    for(let i = 0; i < 5; i++) {
+        let randNum = Math.floor(Math.random()*10);
+        builder.concat(randNum);
+    }
+
+    return randNum;
+
+}
+
+main();

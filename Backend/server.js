@@ -1,3 +1,5 @@
+const helperFunctions = require('./functions/myFunctions');
+console.log(add(2, 3)); // 5
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -21,6 +23,29 @@ app.post('/api/signup', (req,res) => {
 
 app.patch('/api/game', (req, res) => {
   // needs to be implemented (USER CHECKS OR UNCHECKS BOX, maybe saves? anyways EXISTING USER PLAYS)
+=======
+app.get('/users/:id', (req, res) => {
+  // TODO: show specific user
+});
+
+app.post('/users/signup/:id', (req,res) => {
+  // TODO: SIGNUP
+}); 
+
+app.post('/users/login/:id', (req, res) => {
+  // TODO: LOGIN
+});
+
+app.patch('/users/changepassword/:id', (req, res) => {
+  // TODO: update user file (new password)
+});
+
+app.patch('/users/changeusername/:id', (req, res) => {
+  // TODO: update user file (new username)
+});
+
+app.patch('/game/update/:id', (req, res) => {
+  // TODO: update user file (gameplay)
 });
 
 app.get('/api/game', (req, res) => {
