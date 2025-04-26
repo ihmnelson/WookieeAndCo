@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const buttonStyle = {
-    margin: '16px',
-    padding: '1.2rem 0', // remove horizontal padding
+    margin: '12px',
+    padding: '1rem 0', // remove horizontal padding
     width: '600px',       // <-- set fixed width
     fontSize: '2rem',
     fontWeight: '600',
@@ -52,20 +52,10 @@ function Home() {
           color: '#5b4f6e', 
           fontSize: '8rem', 
           marginTop: '-42px',       // no top margin
-          marginBottom: '60px'  // small gap below the title
+          marginBottom: '32px'  // small gap below the title
         }}>
-          Health Bingo
+          Healthy Habits Bingo 
         </h1>
-      {/* Navigation buttons */}
-      <Link to="/signup">
-        <button>Sign Up</button>
-      </Link>
-      <Link to="/login">
-        <button>Login</button>
-      </Link>
-      <Link to="/game">
-        <button>Game</button>
-      </Link>
 
         <div>
           <Link to="/signup">
