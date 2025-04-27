@@ -1,20 +1,72 @@
 {
-    "1001": {
-      "username": "isaac",
-      "cached_password": "hashed_pw_1",
-      "streak": 15,
-      "todays_data": [1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1]
-    },
-    "1002": {
-      "username": "sarah",
-      "cached_password": "hashed_pw_2",
-      "streak": 3,
-      "todays_data": [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0]
-    },
-    "1003": {
-      "username": "alex",
-      "cached_password": "hashed_pw_3",
-      "streak": 27,
-      "todays_data": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    }
+  "1024": {
+    "username": "User1",
+    "cached_password": "hash_abc123",
+    "streak": 4,
+    "todays_data": [1,0,0,1,1,0,0,1,0,1,1,0,1,0,0,1,1,0,0,1,0,1,0,0],
+    "friends_ids": [2048, 3072, 5120]
+  },
+  "2048": {
+    "username": "User2",
+    "cached_password": "hash_def456",
+    "streak": 2,
+    "todays_data": [0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0],
+    "friends_ids": [1024]
+  },
+  "3072": {
+    "username": "User3",
+    "cached_password": "hash_ghi789",
+    "streak": 7,
+    "todays_data": [1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0],
+    "friends_ids": [1024, 4096]
+  },
+  "4096": {
+    "username": "User4",
+    "cached_password": "hash_jkl012",
+    "streak": 0,
+    "todays_data": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "friends_ids": []
+  },
+  "5120": {
+    "username": "User5",
+    "cached_password": "hash_mno345",
+    "streak": 5,
+    "todays_data": [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0],
+    "friends_ids": [1024, 6144, 7168, 8192]
+  },
+  "6144": {
+    "username": "User6",
+    "cached_password": "hash_pqr678",
+    "streak": 1,
+    "todays_data": [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+    "friends_ids": [5120, 7168]
+  },
+  "7168": {
+    "username": "User7",
+    "cached_password": "hash_stu901",
+    "streak": 3,
+    "todays_data": [1,1,1,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0],
+    "friends_ids": [5120, 6144, 8192]
+  },
+  "8192": {
+    "username": "User8",
+    "cached_password": "hash_vwx234",
+    "streak": 9,
+    "todays_data": [1,0,1,1,0,1,0,1,1,0,1,0,1,1,0,1,0,1,1,0,1,0,1,1],
+    "friends_ids": [5120, 7168]
+  },
+  "9216": {
+    "username": "User9",
+    "cached_password": "hash_yza567",
+    "streak": 6,
+    "todays_data": [0,1,1,0,1,0,1,1,0,1,0,1,1,0,1,0,1,1,0,1,0,1,1,0],
+    "friends_ids": []
+  },
+  "10000": {
+    "username": "User10",
+    "cached_password": "hash_bcd890",
+    "streak": 8,
+    "todays_data": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    "friends_ids": [3072, 4096, 7168, 8192]
   }
+}

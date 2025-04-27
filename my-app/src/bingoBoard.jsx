@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const activities = [
-    "10 Jumping Jacks", "5 Push-ups", "10-min walk", "open blinds", "Run in place for 20s",
-    "5 Squats", "10 High Knees", "Stretch for 30s", "10 Lunges", "5 Burpees",
-    "Arm Circles for 20s", "10 Toe Touches", "5 Mountain Climbers", "Dance for 1 min", "Side Lunges x5",
-    "15 Second Balance Hold", "10 Shoulder Rolls", "Deep Breathing for 20s", "5 Calf Raises", "Swing Arms x10",
-    "5 Side Leg Raises", "10 Second Yoga Pose", "Jump Forward and Back 5x", "Walk in a Circle", "Shake Arms & Legs"
-];
+const activities = require('./data/activities.json');
 
 const boardSize = 5;
 

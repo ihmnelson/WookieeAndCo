@@ -57,7 +57,15 @@ function Home() {
           Healthy Habits Bingo 
         </h1>
 
-        <div>
+        <div><Link to="/game">
+            <button
+              style={buttonStyle}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = buttonHoverStyle.backgroundColor}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = buttonStyle.backgroundColor}
+            >
+              Game
+            </button>
+          </Link>
           <Link to="/signup">
             <button
               style={buttonStyle}
