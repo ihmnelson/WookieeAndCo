@@ -83,10 +83,10 @@ app.post('/users/signup/:test', async (req,res) => {
       // NEED TO ADD PASSWORD STUFF
       workingHashes[userID] = hashedPassword;
   
-      res.json({ message: 'Signup successful!' });
+      res.json({success: true, message: 'Signup successful!' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Error signing up.' });
+      res.status(500).json({success: false, message: 'Error signing up.' });
     }
   
     // You can now create a user, save them, etc.
@@ -133,9 +133,9 @@ app.post('/users/login/:id', async (req, res) => {
         const userInfo = entry[userID];
 
         if (userInfo.username === username && workingHashes[userID] === hashedPassword) {
-          res.json({ message: 'Login successful!' });
+          res.json({success: true,  message: 'Login successful!' });
         } else {
-          res.json({ message: 'Login Failed' });
+          res.json({success: false, message: 'Login Failed' });
         }
       }
   
