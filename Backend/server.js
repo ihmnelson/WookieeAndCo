@@ -93,7 +93,7 @@ app.post('/users/signup/:test', async (req,res) => {
     res.json({ message: 'Signup received!' });
 });
 
-app.post('/users/login/:id', (req, res) => {
+app.post('/users/login/:id', async (req, res) => {
   // tells the server to login with credentials
   if (req.params.test === "false") {
     workingData = userData;
