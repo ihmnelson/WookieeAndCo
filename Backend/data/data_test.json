@@ -1,7 +1,6 @@
 {
   "1024": {
     "username": "User1",
-    "cached_password": "hash_abc123",
     "streak": 4,
     "todays_data": [
       1,

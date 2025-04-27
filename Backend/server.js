@@ -4,6 +4,8 @@ const app = express();
 const PORT = 3000;
 const fs = require('fs');
 const generateDailyGame = require('./functions');
+const bcrypt = require('bcrypt');
+const generateID = require('./functions');
 
 
 // On runtime define data to memory
@@ -44,20 +46,57 @@ app.get('/users/:id/:test', (req, res) => {
   }
 });
 
-app.post('/users/signup/:id', (req,res) => {
+app.post('/users/signup/:test', async (req,res) => {
+  if (req.params.test === "false") {
+    workingData = userData;
+  } else if (req.params.test === "true") {
+    const testUserDataRaw = fs.readFileSync('./data/data_test.json', 'utf-8');
+    const testUserData = JSON.parse(testUserDataRaw);
+    workingData = testUserData;
+  }else {
+    res.status(202).json({message: "bad url (also not sure if 202 is correct code"});
+  }
   // tells the server to sign up a new user, returns a signal to send the user to the login page
-}); 
+    const userId = generateID;   // <-- from the URL
+    const { username, password } = req.body;  // <-- from the POST body
+
+    try {
+      // Hash the password
+      const saltRounds = 10;  // standard secure number
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+  
+      console.log('User ID:', userId);
+      console.log('Username:', username);
+      console.log('Hashed Password:', hashedPassword);
+  
+      workingData[userID] = {
+        "username" : username,
+        "streak": 0,
+        "todays_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "friends_ids": []
+      }
+      // NEED TO ADD PASSWORD STUFF
+  
+      res.json({ message: 'Signup successful!' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error signing up.' });
+    }
+  
+    // You can now create a user, save them, etc.
+    res.json({ message: 'Signup received!' });
+});
 
 app.post('/users/login/:id', (req, res) => {
   // tells the server to login with credentials
 });
 
 app.patch('/users/changepassword/:id', (req, res) => {
-  // tells the server that the user changed their password
+  // tells the server that the user changed their password NOT IMPORTANT FOR NOW
 });
 
 app.patch('/users/changeusername/:id', (req, res) => {
-  // tells the server that the user changed their name
+  // tells the server that the user changed their name NOT IMPORTANT FOR NOW
 });
 
 app.patch('/game/update/:id/:index/:nowselected/:test', (req, res) => {
@@ -83,14 +122,13 @@ app.patch('/game/update/:id/:index/:nowselected/:test', (req, res) => {
   curUser["todays_data"][req.params.index] = isSelected;
   userData[req.params.id] = curUser;
   fs.writeFileSync('./data/data.json', JSON.stringify(userData, null, 2));
-  fs.writeFileSync('./data/data_test.json', JSON.stringify(userData, null, 2));
+  fs.writeFileSync('./data/data_test.json', JSON.stringify(testUserData, null, 2));
 
   res.json({curUser});
 });
 
 app.get('/game/today', (req, res) => {
   // Read existing games
-
   // Get today's date
   const today = new Date().toISOString().split('T')[0];
 
