@@ -14,18 +14,36 @@ const BingoGame = () => {
     const [bingoBoard, setBingoBoard] = useState(
         Array(boardSize).fill().map((_, rowIndex) => 
             Array(boardSize).fill(false).map((cell, colIndex) => 
-                rowIndex === 2 && colIndex === 2 ? true : cell // FREE SPACE stays true
+                rowIndex === 2 && colIndex === 2 ? true : cell
             )
         )
     );
     const [showPopup, setShowPopup] = useState(false);
     const [completedBingos, setCompletedBingos] = useState(new Set());
     const [bingoCount, setBingoCount] = useState(0);
-    const [singleBingoAchieved, setSingleBingoAchieved] = useState(false); // Tracks first bingo
-    const [blackoutAchieved, setBlackoutAchieved] = useState(false); // Tracks blackout
+    const [singleBingoAchieved, setSingleBingoAchieved] = useState(false);
+    const [blackoutAchieved, setBlackoutAchieved] = useState(false);
 
     useEffect(() => {
         generateBoard();
+
+        // Fully prevent scrolling
+        document.documentElement.style.height = "100%";
+        document.body.style.height = "100%";
+        document.body.style.overflow = "hidden";
+        document.body.style.margin = "0";
+        document.body.style.padding = "0";
+        document.body.style.backgroundColor = "#e6ecef";
+
+        return () => {
+            // Reset when component unmounts
+            document.documentElement.style.height = "";
+            document.body.style.height = "";
+            document.body.style.overflow = "";
+            document.body.style.margin = "";
+            document.body.style.padding = "";
+            document.body.style.backgroundColor = "";
+        };
     }, []);
 
     const generateBoard = () => {
@@ -45,7 +63,6 @@ const BingoGame = () => {
     const checkWin = (board) => {
         let newBingos = new Set(completedBingos);
         let prevBingoCount = newBingos.size;
-        let newBingoAchieved = false;
 
         for (let i = 0; i < boardSize; i++) {
             if (board[i].every(cell => cell)) newBingos.add(`row-${i}`);
@@ -55,24 +72,22 @@ const BingoGame = () => {
         if (board.map((row, i) => row[i]).every(cell => cell)) newBingos.add("diag-1");
         if (board.map((row, i) => row[boardSize - 1 - i]).every(cell => cell)) newBingos.add("diag-2");
 
-        // If a new bingo is found, increase the counter ONCE
         if (newBingos.size > prevBingoCount) {
             setShowPopup(true);
             setBingoCount(prevCount => prevCount + 1);
-            setSingleBingoAchieved(true); // First bingo achieved
+            setSingleBingoAchieved(true);
         }
 
         setCompletedBingos(newBingos);
 
-        // Check if all squares are true for blackout
         if (board.every(row => row.every(cell => cell))) {
             setBlackoutAchieved(true);
         }
     };
 
     const toggleCell = (i, j) => {
-        if (i === 2 && j === 2) return; // Prevent changing FREE SPACE
-        if (bingoBoard[i][j]) return; // Prevent toggling back to false
+        if (i === 2 && j === 2) return;
+        if (bingoBoard[i][j]) return;
 
         setBingoBoard(prevBoard => {
             const newBoard = prevBoard.map((row, rowIndex) =>
@@ -84,8 +99,27 @@ const BingoGame = () => {
     };
 
     return (
-        <div style={{ textAlign: "center", padding: "80px", fontFamily: "Arial, sans-serif", color: "black", backgroundColor: "#d3dee6" }}>
-            <h2 style={{ fontSize: "32px", marginTop: "-55px" }}>🌳 Healthy Habbits Bingo 🚶‍♂️</h2>
+        <div style={{ 
+            minHeight: "100vh", 
+            textAlign: "center", 
+            padding: "00px", 
+            fontFamily: "Arial, sans-serif", 
+            color: "black",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center", // Center all content nicely
+            backgroundImage: `
+                linear-gradient(90deg, #d3dee6 25%, transparent 25%, transparent 75%, #d3dee6 75%),
+                linear-gradient(#d3dee6 25%, transparent 25%, transparent 75%, #d3dee6 75%)
+            `,
+            backgroundSize: '516px 516px',
+            backgroundPosition: '0 0, 200px 200px', 
+            backgroundColor: '#e6ecef', // Added checkerboard background
+        }}>
+            <h2 style={{ fontSize: "32px", marginTop: "0px" }}>
+                🌳 Healthy Habits Bingo 🚶‍♂️
+            </h2>
 
             <div 
                 style={{
@@ -117,11 +151,13 @@ const BingoGame = () => {
                                 backgroundColor: cell ? "#7194f0" : "#280732",
                                 color: "white",
                                 borderRadius: "10px",
-                                transition: "all 0.3s ease-in-out"
+                                transition: "all 0.3s ease-in-out",
                             }}
                             className={i === 2 && j === 2 ? "center-cell" : ""}
                         >
-                            {i === 2 && j === 2 ? "FREE SPACE" : activities[i * boardSize + j]}
+                            <span style={{ padding: "5px" }}> {/* Added padding to the text */}
+                                {i === 2 && j === 2 ? "FREE SPACE" : activities[i * boardSize + j]}
+                            </span>
                         </div>
                     ))
                 )}
