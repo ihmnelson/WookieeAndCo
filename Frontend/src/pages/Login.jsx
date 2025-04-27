@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Login() {
   const buttonStyle = {
@@ -32,6 +33,14 @@ function Login() {
     e.preventDefault();
     // TODO: Send POST request to backend /api/login with username + password
   };
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'auto'; // Re-enable scrolling when the component unmounts
+    };
+  }, []); // Empty dependency array ensures this runs only once after the initial render
 
   return (
     <div style={{

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Signup() {
   const buttonStyle = {
@@ -33,6 +34,14 @@ function Signup() {
     // TODO: Send POST request to backend /api/signup with username + password
   };
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'auto'; // Re-enable scrolling when the component unmounts
+    };
+  }, []); // Empty dependency array ensures this runs only once after the initial render
+
   return (
     <div style={{
       display: 'flex',
@@ -60,9 +69,9 @@ function Signup() {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        <h1 style={{ 
-          color: '#5b4f6e', 
-          fontSize: '7rem', 
+        <h1 style={{
+          color: '#5b4f6e',
+          fontSize: '7rem',
           marginTop: '0',
           marginBottom: '60px',
         }}>
