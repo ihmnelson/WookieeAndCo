@@ -72,10 +72,10 @@ app.patch('/game/update/:id/:index/:nowselected/:test', (req, res) => {
     res.status(202).json({message: "bad url (also not sure if 202 is correct code"});
   }
 
-  if (req.params.nowselected === 'true') {
-    const isSelected = 1;
-  } else if (req.params.nowselected === 'false') {
-    const isSelected = 0;
+  if (req.params.nowselected === "true") {
+    var isSelected = 1;
+  } else if (req.params.nowselected === "false") {
+    var isSelected = 0;
   } else {
     res.status(202).json({message: "you messed up"});
   }
@@ -83,6 +83,9 @@ app.patch('/game/update/:id/:index/:nowselected/:test', (req, res) => {
   curUser["todays_data"][req.params.index] = isSelected;
   userData[req.params.id] = curUser;
   fs.writeFileSync('./data/data.json', JSON.stringify(userData, null, 2));
+  fs.writeFileSync('./data/data_test.json', JSON.stringify(userData, null, 2));
+
+  res.json({curUser});
 });
 
 app.get('/game/today', (req, res) => {
