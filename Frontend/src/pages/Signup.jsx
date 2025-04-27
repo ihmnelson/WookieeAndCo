@@ -1,7 +1,10 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function Signup() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   const buttonStyle = {
     margin: '16px',
     padding: '1rem 6rem',
@@ -29,18 +32,38 @@ function Signup() {
     boxSizing: 'border-box',
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Send POST request to backend /api/signup with username + password
+    
+    try {
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        console.log('Signup successful!');
+        // TODO: Redirect or show success message
+      } else {
+        console.error('Signup failed.');
+        // TODO: Show an error message
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // TODO: Handle network errors
+    }
   };
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
     return () => {
-      document.body.style.overflow = 'auto'; // Re-enable scrolling when the component unmounts
+      document.body.style.overflow = 'auto';
     };
-  }, []); // Empty dependency array ensures this runs only once after the initial render
+  }, []);
 
   return (
     <div style={{
@@ -78,10 +101,21 @@ function Signup() {
           📝 Sign Up 📝
         </h1>
 
-        {/* Signup form */}
         <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '400px' }}>
-          <input type="text" placeholder="Username" style={inputStyle} /><br/>
-          <input type="password" placeholder="Password" style={inputStyle} /><br/>
+          <input
+            type="text"
+            placeholder="Username"
+            style={inputStyle}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          /><br/>
+          <input
+            type="password"
+            placeholder="Password"
+            style={inputStyle}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          /><br/>
           <button
             type="submit"
             style={buttonStyle}
@@ -92,14 +126,11 @@ function Signup() {
           </button>
         </form>
 
-        {/* Link back to login page */}
         <div style={{ marginTop: '16px' }}>
           <Link to="/login" style={{ color: '#5b4f6e', fontWeight: '600', textDecoration: 'underline' }}>
             Already have an account? Login
           </Link>
         </div>
-
-        {/* TODO: Show success or error message here */}
       </div>
     </div>
   );
