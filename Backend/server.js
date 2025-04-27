@@ -60,8 +60,29 @@ app.patch('/users/changeusername/:id', (req, res) => {
   // tells the server that the user changed their name
 });
 
-app.patch('/game/update/:id', (req, res) => {
+app.patch('/game/update/:id/:index/:nowselected/:test', (req, res) => {
   // tells the server that the user clicked a tile
+  if (req.params.test === "false") {
+    curUser = userData[req.params.id];
+  } else if (req.params.test === "true") {
+    const testUserDataRaw = fs.readFileSync('./data/data_test.json', 'utf-8');
+    const testUserData = JSON.parse(testUserDataRaw);
+    curUser = testUserData[req.params.id];
+  }else {
+    res.status(202).json({message: "bad url (also not sure if 202 is correct code"});
+  }
+
+  if (req.params.nowselected === 'true') {
+    const isSelected = 1;
+  } else if (req.params.nowselected === 'false') {
+    const isSelected = 0;
+  } else {
+    res.status(202).json({message: "you messed up"});
+  }
+
+  curUser["todays_data"][req.params.index] = isSelected;
+  userData[req.params.id] = curUser;
+  fs.writeFileSync('./data/data.json', JSON.stringify(userData, null, 2));
 });
 
 app.get('/game/today', (req, res) => {
