@@ -86,7 +86,7 @@ class UserData {
       const newUser = {
         ...userData, // Copy existing user data
         streak: 0,
-        todays_data: Array(25).fill(false), // Initialize with 25 false
+        todays_data: Array(24).fill(false), // Initialize with 25 false
       };
       this.data[newUserId] = userData; // Add the new user data with the ID as the key.
       this.writeData(this.data); // Write the updated data to the JSON file
