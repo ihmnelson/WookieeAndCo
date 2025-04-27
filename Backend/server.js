@@ -25,21 +25,18 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id/:test', (req, res) => {
   // asks the server for an id's username, today's game, and streak
-  curUser = userData[req.params.id];
-  if (curuser) {
-    res.json(curUser);
-  } else {
-    res.status(404).json({message: 'User not found'});
+  if (req.params.test === "false") {
+    curUser = userData[req.params.id];
+  } else if (req.params.test === "true") {
+    const testUserDataRaw = fs.readFileSync('./data/data_test.json', 'utf-8');
+    const testUserData = JSON.parse(testUserDataRaw);
+    curUser = testUserData[req.params.id];
+  }else {
+    res.status(202).json({message: "bad url (also not sure if 202 is correct code"});
   }
-});
 
-app.get('/users/test/:id', (req, res) => {
-  // asks the server for an id's username, today's game, and streak
-  const testUserDataRaw = fs.readFileSync('./data/data_test.json', 'utf-8');
-  const testUserData = JSON.parse(testUserDataRaw);
-  curUser = testUserData[req.params.id];
   if (curUser) {
     res.json(curUser);
   } else {
