@@ -110,7 +110,7 @@ const BingoGame = () => {
             backgroundPosition: '0 0, 200px 200px', 
             backgroundColor: '#e6ecef', // Added checkerboard background
         }}>
-            <h2 style={{ fontSize: "32px", marginTop: "0px" }}>
+            <h2 style={{ fontSize: "32px", marginTop: "-175px" }}>
                 🌳 Healthy Habits Bingo 🚶‍♂️
             </h2>
 
@@ -122,7 +122,7 @@ const BingoGame = () => {
                     gap: "15px",
                     justifyContent: "center",
                     alignItems: "center",
-                    marginTop: "20px"
+                    marginTop: "-15px"
                 }}
             >
                 {bingoBoard.map((row, i) =>
