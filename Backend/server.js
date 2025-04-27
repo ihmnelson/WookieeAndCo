@@ -95,6 +95,58 @@ app.post('/users/signup/:test', async (req,res) => {
 
 app.post('/users/login/:id', (req, res) => {
   // tells the server to login with credentials
+  if (req.params.test === "false") {
+    workingData = userData;
+    workingHashes = passData;
+  } else if (req.params.test === "true") {
+    const testUserDataRaw = fs.readFileSync('./data/data_test.json', 'utf-8');
+    const testUserData = JSON.parse(testUserDataRaw);
+    const testHashesRaw = fs.readFileSync('./data/pass_hashes_test.json', 'utf-8');
+    const testHashes = JSON.parse(testHashesRaw);
+    workingData = testUserData;
+  }else {
+    res.status(202).json({message: "bad url (also not sure if 202 is correct code"});
+  }
+  // tells the server to sign up a new user, returns a signal to send the user to the login page
+    const userId = generateID;   // <-- from the URL
+    const { username, password } = req.body;  // <-- from the POST body
+
+    try {
+      // Hash the password
+      const saltRounds = 10;  // standard secure number
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+  
+      console.log('User ID:', userId);
+      console.log('Username:', username);
+      console.log('Hashed Password:', hashedPassword);
+  
+      workingData[userID] = {
+        "username" : username,
+        "streak": 0,
+        "todays_data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "friends_ids": []
+      }
+
+
+      for (const entry of workingData) {
+        const userID = Object.keys(entry)[0];
+        const userInfo = entry[userID];
+
+        if (userInfo.username === username && workingHashes[userID] === hashedPassword) {
+          res.json({ message: 'Login successful!' });
+        } else {
+          res.json({ message: 'Login Failed' });
+        }
+      }
+  
+      
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error logging in.' });
+    }
+  
+    // You can now create a user, save them, etc.
+    res.json({ message: 'Login received!' });
 });
 
 app.patch('/users/changepassword/:id', (req, res) => {
