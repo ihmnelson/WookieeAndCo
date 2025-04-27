@@ -26,3 +26,6 @@ yarn-error.log*
 # OS trash
 Thumbs.db
 Desktop.ini
+
+./Backend/data/days.json
+./Backend/data/data.json
