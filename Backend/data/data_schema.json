@@ -5,7 +5,6 @@
       "type": "object",
       "properties": {
         "username": { "type": "string" },
-        "cached_password": { "type": "string" },
         "streak": { 
           "type": "integer",
           "minimum": 0,
@@ -35,7 +34,7 @@
           "maxItems": 99
         }
       },
-      "required": ["username", "cached_password", "streak", "todays_data"],
+      "required": ["username", "streak", "todays_data"],
       "additionalProperties": false
     }
   },

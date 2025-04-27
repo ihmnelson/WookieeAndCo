@@ -5,6 +5,14 @@ const PORT = 3000;
 const fs = require('fs');
 const generateDailyGame = require('./functions');
 
+
+// On runtime define data to memory
+const challengeDataRaw = fs.readFileSync('./data/days.json', 'utf8');
+const challengeData = JSON.parse(challengeDataRaw);
+
+const userDataRaw = fs.readFileSync('./data/data.json', 'utf-8');
+const userData = JSON.parse(userDataRaw);
+
 app.use(cors()); // ← this is all you need for CORS
 app.use(express.json()); // to accept JSON body data if needed
 
@@ -19,6 +27,24 @@ app.listen(PORT, () => {
 
 app.get('/users/:id', (req, res) => {
   // asks the server for an id's username, today's game, and streak
+  curUser = userData[req.params.id];
+  if (curuser) {
+    res.json(curUser);
+  } else {
+    res.status(404).json({message: 'User not found'});
+  }
+});
+
+app.get('/users/test/:id', (req, res) => {
+  // asks the server for an id's username, today's game, and streak
+  const testUserDataRaw = fs.readFileSync('./data/data_test.json', 'utf-8');
+  const testUserData = JSON.parse(testUserDataRaw);
+  curUser = testUserData[req.params.id];
+  if (curUser) {
+    res.json(curUser);
+  } else {
+    res.status(404).json({message: 'User not found'});
+  }
 });
 
 app.post('/users/signup/:id', (req,res) => {
@@ -43,14 +69,12 @@ app.patch('/game/update/:id', (req, res) => {
 
 app.get('/game/today', (req, res) => {
   // Read existing games
-  const dataRaw = fs.readFileSync('./data/days.json', 'utf8');
-  const data = JSON.parse(dataRaw);
 
   // Get today's date
   const today = new Date().toISOString().split('T')[0];
 
   // See if today's game already exists
-  let todays_game = data[today];
+  let todays_game = challengeData[today];
 
   if (!todays_game) {
     // If not, generate it
@@ -59,7 +83,7 @@ app.get('/game/today', (req, res) => {
     todays_game = newGame;
 
     // Save it to the file immediately
-    fs.writeFileSync('./data/days.json', JSON.stringify(data, null, 2));
+    fs.writeFileSync('./data/days.json', JSON.stringify(challengeData, null, 2));
   }
 
   // Now ALWAYS respond with today's game

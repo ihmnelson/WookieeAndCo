@@ -1,0 +1,12 @@
+{
+    "1024": "$2b$10$abcdabcdabcdabcdabcdab.A1",
+    "2048": "$2b$10$abcdabcdabcdabcdabcdab.B2",
+    "3072": "$2b$10$abcdabcdabcdabcdabcdab.C3",
+    "4096": "$2b$10$abcdabcdabcdabcdabcdab.D4",
+    "5120": "$2b$10$abcdabcdabcdabcdabcdab.E5",
+    "6144": "$2b$10$abcdabcdabcdabcdabcdab.F6",
+    "7168": "$2b$10$abcdabcdabcdabcdabcdab.G7",
+    "8192": "$2b$10$abcdabcdabcdabcdabcdab.H8",
+    "9216": "$2b$10$abcdabcdabcdabcdabcdab.I9",
+    "10000": "$2b$10$abcdabcdabcdabcdabcdab.J0"
+  }
