@@ -131,7 +131,7 @@ const BingoGame = () => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       minHeight: '100vh', // Ensure it covers the viewport height
       backgroundImage: `
         linear-gradient(90deg, #d3dee6 25%, transparent 25%, transparent 75%, #d3dee6 75%),
@@ -154,7 +154,7 @@ const BingoGame = () => {
         </button>
       </Link>
 
-      <h2 style={{ fontSize: "32px", marginBottom: "20px" }}>
+      <h2 style={{ fontSize: "32px", marginBottom: "20px",  color: "#4a4a4a"  }}>
         🌳 Healthy Habits Bingo 🚶‍♂️
       </h2>
 
