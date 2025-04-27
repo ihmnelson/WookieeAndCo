@@ -14,6 +14,8 @@ const challengeData = JSON.parse(challengeDataRaw);
 
 const userDataRaw = fs.readFileSync('./data/data.json', 'utf-8');
 const userData = JSON.parse(userDataRaw);
+const passDataRaw = fs.readFileSync('./data/pass_hashes.json', 'utf-8');
+const passData = JSON.parse(passDataRaw);
 
 app.use(cors()); // ← this is all you need for CORS
 app.use(express.json()); // to accept JSON body data if needed
@@ -49,9 +51,12 @@ app.get('/users/:id/:test', (req, res) => {
 app.post('/users/signup/:test', async (req,res) => {
   if (req.params.test === "false") {
     workingData = userData;
+    workingHashes = passData;
   } else if (req.params.test === "true") {
     const testUserDataRaw = fs.readFileSync('./data/data_test.json', 'utf-8');
     const testUserData = JSON.parse(testUserDataRaw);
+    const testHashesRaw = fs.readFileSync('./data/pass_hashes_test.json', 'utf-8');
+    const testHashes = JSON.parse(testHashesRaw);
     workingData = testUserData;
   }else {
     res.status(202).json({message: "bad url (also not sure if 202 is correct code"});
@@ -76,6 +81,7 @@ app.post('/users/signup/:test', async (req,res) => {
         "friends_ids": []
       }
       // NEED TO ADD PASSWORD STUFF
+      workingHashes[userID] = hashedPassword;
   
       res.json({ message: 'Signup successful!' });
     } catch (error) {
@@ -123,6 +129,8 @@ app.patch('/game/update/:id/:index/:nowselected/:test', (req, res) => {
   userData[req.params.id] = curUser;
   fs.writeFileSync('./data/data.json', JSON.stringify(userData, null, 2));
   fs.writeFileSync('./data/data_test.json', JSON.stringify(testUserData, null, 2));
+  fs.writeFileSync('./data/pass_hashes.json', JSON.stringify(userData, null, 2));
+  fs.writeFileSync('./data/pass_hashes_test.json', JSON.stringify(testUserData, null, 2));
 
   res.json({curUser});
 });
