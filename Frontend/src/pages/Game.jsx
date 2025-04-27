@@ -2,13 +2,8 @@ import BingoGame from './GameFunctions';
 
 function Game() {
     return (
-        <div>
-            <h1>🎮 Game Page</h1>
-
-            {/* TODO: Build your game here */}
+        <div style={{ margin: 0, padding: 0 }}>
             <BingoGame />
-
-            <p>Welcome to the game! Game content goes here.</p>
         </div>
     );
 }
